@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/echarts.common.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="box" style="width:800px;height:600px;"></div>
+
+<script type="text/javascript">
+
+var mychart=echarts.init(document.getElementById('box'));
+
+var option={
+  //标题
+  title:{
+     text:'AJAX异步加载数据---折线图演示'
+  },
+  //x轴数据
+  xAxis:{
+     data:[]
+  },
+  //y轴数据
+  yAxis:{},
+  //系列数据
+  series:[{
+    name:'北京',
+    type:'line',
+    data:[]
+  }]
+
+};
+
+//设置图表属性
+mychart.setOption(option);
+//首先打开加载动画
+mychart.showLoading();
+//定于2个数组，X轴数据
+var names=[];
+var scores=[];
+//发出ajax请求
+$.ajax({
+  type:'post',
+  url:'getall',
+  dataType:'json',
+  success:function(json){
+    if(json){
+       //便利json数组，姓名：x轴数据 成绩:Y轴数据
+       for(var i=0;i<json.length;i++){
+         names.push(json[i].name);
+         scores.push(json[i].score);
+       }
+       //隐藏加载动画
+       mychart.hideLoading();
+       mychart.setOption({
+          //x轴数据
+         xAxis:{
+           data:names
+        },
+        series:[{
+        
+           name:'北京',
+           type:'line',
+           data:scores
+        }]
+       
+       });
+    }
+  }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/echarts.common.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="box" style="width:800px;height:600px;"></div>
+
+<script type="text/javascript">
+
+var mychart=echarts.init(document.getElementById('box'));
+
+var option={
+  //标题
+  title:{
+     text:'AJAX异步加载数据---饼状图演示'
+  },  
+  //系列数据
+  series:[{
+    name:'北京',
+    type:'pie',
+    data:[]
+  }]
+
+};
+
+//设置图表属性
+mychart.setOption(option);
+//首先打开加载动画
+mychart.showLoading();
+
+//发出ajax请求
+$.ajax({
+  type:'post',
+  url:'getallpie',
+  dataType:'json',
+  success:function(json){
+    if(json){
+      
+       //隐藏加载动画
+       mychart.hideLoading();
+       mychart.setOption({
+        
+        series:[{
+        
+           name:'北京',
+           type:'pie',
+           data:json
+        }]
+       
+       });
+    }
+  }
+})
+</script>
+</body>
+</html>

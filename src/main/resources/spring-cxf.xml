@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xsi:schemaLocation="http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd">
+
+
+<!-- 注册发布webservice -->
+<jaxws:server id="webservice001" address="/v1/hello">
+<!-- 注册要发布的bean -->
+<jaxws:serviceBean>
+   <ref bean="helloservice"/>
+</jaxws:serviceBean>
+</jaxws:server>
+
+<!-- 注册发布webservice -->
+<jaxws:server id="webservice002" address="/v1/hello2">
+<!-- 注册要发布的bean -->
+<jaxws:serviceBean>
+   <ref bean="helloservice2"/>
+</jaxws:serviceBean>
+</jaxws:server>
+
+</beans>

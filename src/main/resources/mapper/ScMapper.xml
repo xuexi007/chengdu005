@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.offcn.dao.ScDao">
+
+<select id="getScByDate" resultType="com.offcn.po.Sc">
+  select * from sc where createdate between #{begindate} and #{enddate}
+
+</select>
+
+<select id="getScByNameAndCreateDate" resultType="com.offcn.po.Sc">
+  select * from sc where name=#{name} and createdate=#{createdate}
+
+</select>
+
+<insert id="save" parameterType="com.offcn.po.Sc">
+  insert into sc(name,lowprice,avgprice,hprice,guige,unit,createdate) values(#{name},#{lowprice},#{avgprice},#{hprice},#{guige},#{unit},#{createdate})
+</insert>
+</mapper>
