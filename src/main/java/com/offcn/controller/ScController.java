@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.offcn.po.Sc;
 import com.offcn.service.ScService;
-
+/**
+ * 新增注释
+ * @author Administrator
+ *
+ */
 @Controller
 public class ScController {
 
